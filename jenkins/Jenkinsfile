@@ -1,38 +1,38 @@
 pipeline {
-     
+
      parameters {
         string(name: 'artifact_name', defaultValue: 'sample_project', description: 'artifact_name');
         string(name: 'workspace', defaultValue: 'custom_workspace_', description: 'workspace');
         booleanParam(name: 'deploy', defaultValue: true, description: 'deploy to env');
-    }
-     
+     }
+
      agent {
         label {
             label ""
              customWorkspace "${workspace}_${BUILD_NUMBER}"
         }
-    }
-     
+     }
+
     stages {
         stage('checkout devoputils') {
               steps {
                 sh 'git clone https://github.com/devops2021devops/devopsutils.git -b main --single-branch'
-            }
+              }
         }
-         
+
         stage('checkout') {
               steps {
                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
-            }
+              }
         }
-        
+
         stage('update pom.xml') {
           steps {
                sh 'ls'
                sh "python ./devopsutils/change_pom.py -v ${BUILD_NUMBER} -a ${artifact_name}"
           }
         }
-           
+
         stage('Build') {
             steps {
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
@@ -42,11 +42,11 @@ pipeline {
                 success {
                     junit '**/target/surefire-reports/TEST-*.xml'
                     archiveArtifacts 'target/*.jar'
-                    
+
                 }
             }
         }
-         
+
         stage ('Generate result.json') {
             steps {
                 sh """
@@ -56,27 +56,23 @@ pipeline {
                     with open('result.json', 'w') as f:
                             json.dump('{"created by": "python script"}', f)
                     """
-           }
-       }  
-        stage('Deploy') {
-            input {
-                message 'Deploy?'
-                ok 'Do it!'
-                parameters {
-                      choice choices: ['Dev,Stage,Production'], name: 'environment',defaultValue: 'Dev';
-                }
             }
-            steps {
-                sh """
+        }
+        stage('Deploy') {
+             steps {
+               script {
+                           input message :'Deploy?' , ok: 'Do it!',
+                           parameters: [choice(name: 'ENVIRONMENTS',choices: 'Dev\Stage\Production')]
+               }
+                   sh """
                     git checkout -b ${environment} \
                     git add result.json \
                     git commit -m "add result.json file to ${environment}" \
-                    git push https://github.com/devops2021devops/devopsutils.git
+                    git push 'https://github.com/devops2021devops/devopsutils.git'
                 """
-            }
-        } 
-         
-         
-         
+             }
+        }
+
     }
+
 }
