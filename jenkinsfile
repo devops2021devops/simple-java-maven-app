@@ -2,7 +2,7 @@ pipeline {
      agent {
         label {
             label ""
-          customWorkspace "custom_workspace_${BUILD_ID}"
+          customWorkspace "custom_workspace_${BUILD_NUMBER}"
         }
     }
 
@@ -15,7 +15,7 @@ pipeline {
         
         stage('update pom.xml') {
           steps {
-               sh "python ./change_pom.py"
+               sh "python ./change_pom.py -v ${BUILD_NUMBER} -a sample_project_"
           }
         }
         
