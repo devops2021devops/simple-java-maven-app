@@ -1,13 +1,19 @@
 pipeline {
-    agent any
-    tools {
-        maven "M3"
+     agent {
+        label {
+            label ""
+          customWorkspace "custom_workspace_${BUILD_NUMBER}"
+        }
     }
 
     stages {
+        stage('checkout') {
+              steps {
+                git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+            }
+        }
         stage('Build') {
             steps {
-                git 'https://github.com/jglick/simple-maven-project-with-tests.git'
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
 
