@@ -69,6 +69,8 @@ pipeline {
                   
                   
                    sh """
+                    git config --global user.email "devopstasks2021@gmail.com"
+                    git config --global user.name "devopstask"
                     git checkout -b ${env.RELEASE} 
                     git add result.json 
                     git commit -m "add result.json file to ${env.RELEASE}" 
