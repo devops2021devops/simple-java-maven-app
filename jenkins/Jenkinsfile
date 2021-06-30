@@ -1,4 +1,3 @@
-Library 'devopsutils'
 pipeline {
      agent {
         label {
@@ -8,6 +7,12 @@ pipeline {
     }
      
     stages {
+        stage('checkout devoputils') {
+              steps {
+                sh 'git clone https://github.com/devops2021devops/devopsutils.git -b main --single-branch'
+            }
+        }
+         
         stage('checkout') {
               steps {
                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
