@@ -72,7 +72,7 @@ pipeline {
                     git checkout -b ${env.RELEASE} 
                     git add result.json 
                     git commit -m "add result.json file to ${env.RELEASE}" 
-                    git push 'https://github.com/devops2021devops/devopsutils.git'
+                    git push 'git@github.com:devops2021devops/devopsutils.git'
                 """
              }
         }
