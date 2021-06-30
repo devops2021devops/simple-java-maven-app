@@ -15,7 +15,7 @@ pipeline {
         
         stage('update pom.xml') {
           steps {
-               sh "python ./change_pom.py -v ${BUILD_NUMBER} -a sample_project_"
+               sh "python change_pom.py -v ${BUILD_NUMBER} -a sample_project_"
           }
         }
         
