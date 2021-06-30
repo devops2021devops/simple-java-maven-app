@@ -7,12 +7,6 @@ pipeline {
     }
      
     stages {
-        stage('checkout devopsutils') {
-              steps {
-                git branch: 'main', url: 'https://github.com/devops2021devops/devopsutils.git'
-            }
-        }
-    
         stage('checkout') {
               steps {
                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
