@@ -49,7 +49,7 @@ pipeline {
         stage ('Generate result.json') {
             steps {
                 echo "executing python script"
-                sh """
+                sh """\
 PYTHON_CODE=$(cat <<END
 # python code starts here
 import json
