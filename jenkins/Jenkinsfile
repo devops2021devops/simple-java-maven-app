@@ -62,13 +62,16 @@ pipeline {
         stage('Deploy') {
              steps {
                script {
-                           input message :'Deploy?' , ok: 'Do it!',
+                       env.RELEASE = input message :'Deploy?' , ok: 'Do it!',
                            parameters: [choice(name: 'ENVIRONMENTS',choices: ['Dev','Stage','Production'])]
-               }
+               }         
+                echo "${env.RELEASE}"
+                  
+                  
                    sh """
-                    git checkout -b ${ENVIRONMENTS} 
+                    git checkout -b ${env.RELEASE} 
                     git add result.json 
-                    git commit -m "add result.json file to ${ENVIRONMENTS}" 
+                    git commit -m "add result.json file to ${env.RELEASE}" 
                     git push 'https://github.com/devops2021devops/devopsutils.git'
                 """
              }
