@@ -1,4 +1,4 @@
-@Library('devopsutils@main') _
+Library 'devopsutils'
 pipeline {
      agent {
         label {
