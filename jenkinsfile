@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('checkout devopsutils') {
               steps {
-                git clone 'https://github.com/devops2021devops/devopsutils.git' -b main --single-branch devopsutils
+                git branch: 'main', url: 'https://github.com/devops2021devops/devopsutils.git'
             }
         }
     
