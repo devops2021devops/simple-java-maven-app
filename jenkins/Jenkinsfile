@@ -28,7 +28,6 @@ pipeline {
 
         stage('update pom.xml') {
           steps {
-               sh 'ls'
                sh "python ./devopsutils/change_pom.py -v ${BUILD_NUMBER} -a ${artifact_name}"
           }
         }
@@ -51,10 +50,7 @@ pipeline {
             steps {
                 echo "executing python script"
                 sh """
-                    #!/usr/bin/env python
-                    import json
-                    with open('result.json', 'w') as f:
-                            json.dump('{"created by": "python script"}', f)
+                     python <<< $(echo -e "import json\nwith open('result.json', 'w') as f:\n  json.dump('{"created by": "python script"}', f)")
                     """
             }
         }
