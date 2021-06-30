@@ -22,7 +22,7 @@ pipeline {
         stage('update pom.xml') {
           steps {
                sh 'ls'
-               sh "python change_pom.py -v ${BUILD_NUMBER} -a sample_project_"
+               sh "python ./devopsutils/change_pom.py -v ${BUILD_NUMBER} -a sample_project_"
           }
         }
         
