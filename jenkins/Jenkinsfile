@@ -1,1 +1,42 @@
-tes
+pipeline {
+     agent {
+        label {
+            label ""
+          customWorkspace "custom_workspace_${BUILD_NUMBER}"
+        }
+    }
+     
+    stages {
+        stage('checkout devopsutils') {
+              steps {
+                git branch: 'main', url: 'https://github.com/devops2021devops/devopsutils.git'
+            }
+        }
+    
+        stage('checkout') {
+              steps {
+                git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+            }
+        }
+        
+        stage('update pom.xml') {
+          steps {
+               sh 'ls'
+               sh "python change_pom.py -v ${BUILD_NUMBER} -a sample_project_"
+          }
+        }
+        
+        stage('Build') {
+            steps {
+                sh "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+
+            post {
+                success {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.jar'
+                }
+            }
+        }
+    }
+}
