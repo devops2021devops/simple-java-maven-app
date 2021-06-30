@@ -5,8 +5,14 @@ pipeline {
           customWorkspace "custom_workspace_${BUILD_NUMBER}"
         }
     }
-
+     
     stages {
+        stage('checkout devopsutils') {
+              steps {
+                git clone 'https://github.com/devops2021devops/devopsutils.git' -b main --single-branch devopsutils
+            }
+        }
+    
         stage('checkout') {
               steps {
                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
