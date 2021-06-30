@@ -12,6 +12,14 @@ pipeline {
                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
             }
         }
+        
+        stage('change pom.xml') {
+          steps {
+               sh "pwd"
+               sh 'ls'
+          }
+        }
+        
         stage('Build') {
             steps {
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
