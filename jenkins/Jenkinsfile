@@ -62,7 +62,7 @@ pipeline {
              steps {
                script {
                            input message :'Deploy?' , ok: 'Do it!',
-                           parameters: [choice(name: 'ENVIRONMENTS',choices: 'Dev\Stage\Production')]
+                           parameters: [choice(name: 'ENVIRONMENTS',choices: ['Dev,Stage,Production'])]
                }
                    sh """
                     git checkout -b ${environment} \
