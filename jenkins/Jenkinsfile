@@ -49,7 +49,16 @@ pipeline {
         stage ('Generate result.json') {
             steps {
                 echo "executing python script"
-                sh '''python <<< $(echo -e "import json\nwith open('result.json', 'w') as f:\n  json.dump('{"created by": "python script"}', f)")'''
+                sh """
+PYTHON_CODE=$(cat <<END
+# python code starts here
+import json
+with open('result.json', 'w') as f:
+  json.dump('{"created by": "python script"}', f)
+END)
+res="$(python3 -c "$PYTHON_CODE")"
+"""
+             //   sh '''python <<< $(echo -e "import json\nwith open('result.json', 'w') as f:\n  json.dump('{"created by": "python script"}', f)")'''
                     }
         }
         stage('Deploy') {
