@@ -65,9 +65,9 @@ pipeline {
                            parameters: [choice(name: 'ENVIRONMENTS',choices: ['Dev,Stage,Production'])]
                }
                    sh """
-                    git checkout -b ${environment} \
-                    git add result.json \
-                    git commit -m "add result.json file to ${environment}" \
+                    git checkout -b ${environment} 
+                    git add result.json 
+                    git commit -m "add result.json file to ${environment}" 
                     git push 'https://github.com/devops2021devops/devopsutils.git'
                 """
              }
