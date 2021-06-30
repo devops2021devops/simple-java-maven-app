@@ -1,4 +1,11 @@
 pipeline {
+     
+     parameters {
+        string(name: 'artifact_name', defaultValue: 'sample_project', description: 'artifact_name');
+        string(name: 'workspace', defaultValue: 'custom_workspace_', description: 'workspace');
+        booleanParam(name: 'deploy', defaultValue: true, description: 'deploy to env');
+    }
+     
      agent {
         label {
             label ""
@@ -22,7 +29,7 @@ pipeline {
         stage('update pom.xml') {
           steps {
                sh 'ls'
-               sh "python ./devopsutils/change_pom.py -v ${BUILD_NUMBER} -a sample_project_"
+               sh "python ./devopsutils/change_pom.py -v ${BUILD_NUMBER} -a sample_project"
           }
         }
         
