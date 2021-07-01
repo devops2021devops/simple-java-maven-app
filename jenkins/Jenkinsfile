@@ -67,6 +67,7 @@ pipeline {
               //             parameters: [choice(name: 'ENVIRONMENTS',choices: ['Dev','Stage','Production'])]
              //  }         
              //   echo "${env.RELEASE}"
+                  sh "pip install gitpython"
                    sh """\
                     #!/usr/bin/env python
                     from git import Repo
