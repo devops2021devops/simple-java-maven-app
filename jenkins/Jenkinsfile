@@ -67,7 +67,7 @@ pipeline {
               //             parameters: [choice(name: 'ENVIRONMENTS',choices: ['Dev','Stage','Production'])]
              //  }         
              //   echo "${env.RELEASE}"
-    
+                  sh "ssh -vvv git@github.com"
                   sh "git config --global user.email 'devopstasks2021@gmail.com'"
                   sh  "git config --global user.name 'devops2021devops'"
                   sh "git config --global user.password 'Devops2021'"
