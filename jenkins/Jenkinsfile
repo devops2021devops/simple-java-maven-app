@@ -69,9 +69,8 @@ pipeline {
              //   echo "${env.RELEASE}"
                    sh """\
                     #!/usr/bin/env python
-                    import git
                     from git import Repo
-                    repo = git.Repo(".")
+                    repo = Repo(".")
                     branches = repo.branches
                     print(branches)
                     """.stripIndent()
