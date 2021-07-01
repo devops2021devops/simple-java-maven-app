@@ -72,6 +72,7 @@ pipeline {
                   sh  "git config --global user.name 'devops2021devops'"
                   sh "git config --global user.password 'Devops2021'"
                    // git checkout -b ${env.RELEASE} 
+                  // need try and catch to do git checkout -b if the branch already created
                   sh "git checkout -b Dev"
                   sh "git add result.json"
                   sh "git commit -m 'add result.json file to Dev Stage'"
