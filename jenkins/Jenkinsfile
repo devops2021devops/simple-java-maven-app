@@ -68,6 +68,7 @@ pipeline {
              //  }         
              //   echo "${env.RELEASE}"
                   sh "pip install gitpython"
+                  // the purpose of the python script that iv'e started here was to try , catch if the Dev/stage already deployed 
                    sh """\
                     #!/usr/bin/env python
                     from git import Repo
@@ -83,7 +84,7 @@ pipeline {
                     """.stripIndent()
                   
                   
-                   sh "git config  user.email 'devopstasks2021@gmail.com'"
+                  sh "git config  user.email 'devopstasks2021@gmail.com'"
                   sh  "git config  user.name 'devops2021devops'"
                   sh "git config  user.password 'Devops2021'"
                   sh "git add result.json"
