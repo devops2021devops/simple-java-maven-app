@@ -67,6 +67,16 @@ pipeline {
               //             parameters: [choice(name: 'ENVIRONMENTS',choices: ['Dev','Stage','Production'])]
              //  }         
              //   echo "${env.RELEASE}"
+                   sh """\
+                    #!/usr/bin/env python
+                    import git
+                    from git import Repo
+                    repo = git.Repo(".")
+                    branches = repo.branches
+                    print(branches)
+                    """.stripIndent()
+                  
+                  
                    sh "git config  user.email 'devopstasks2021@gmail.com'"
                   sh  "git config  user.name 'devops2021devops'"
                   sh "git config  user.password 'Devops2021'"
