@@ -74,13 +74,10 @@ pipeline {
                    // git checkout -b ${env.RELEASE} 
                   sh "git checkout -b Dev"
                   sh "git add result.json"
-                  sh "git commit -m 'add result.json file to Dev'"
-                  sh "git checkout -b Staging"
-                  sh "git add result.json"
-                  sh "git commit -m 'add result.json file to Staging'" 
+                  sh "git commit -m 'add result.json file to Dev Stage'"
+                  sh "git checkout -b Staging"          
                   //  git commit -m "add result.json file to ${env.RELEASE}" 
-                   sh "git commit -m 'add result.json file to Dev'" 
-                    sh "git push git@github.com:devops2021devops/simple-java-maven-app.git Dev Staging"
+                  sh "git push git@github.com:devops2021devops/simple-java-maven-app.git Dev Staging"
                 
              }
         }
