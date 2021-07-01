@@ -74,7 +74,7 @@ pipeline {
                     repo = Repo(".")
                     branches = repo.branches
                     print(branches)
-                    if("Dev" in [str(x).replace("<git.Head \"refs/heads/","") for x in branches]):
+                    if("Dev" in [str(x).replace('<git.Head "refs/heads/',"") for x in branches]):
                          print("exist")
                          repo.heads.Dev.checkout()
                     else:
