@@ -67,18 +67,18 @@ pipeline {
               //             parameters: [choice(name: 'ENVIRONMENTS',choices: ['Dev','Stage','Production'])]
              //  }         
              //   echo "${env.RELEASE}"
-                  sh "ssh -vvv git@github.com"
-                  sh "git config --global user.email 'devopstasks2021@gmail.com'"
-                  sh  "git config --global user.name 'devops2021devops'"
-                  sh "git config --global user.password 'Devops2021'"
-                   // git checkout -b ${env.RELEASE} 
-                  // need try and catch to do git checkout -b if the branch already created
-                  sh "git checkout -b Dev"
+                   sh "git config  user.email 'devopstasks2021@gmail.com'"
+                  sh  "git config  user.name 'devops2021devops'"
+                  sh "git config  user.password 'Devops2021'"
                   sh "git add result.json"
                   sh "git commit -m 'add result.json file to Dev Stage'"
-                  sh "git checkout -b Staging"          
+                  sh "git checkout -b Dev || git checkout Dev"
+                   // git checkout -b ${env.RELEASE} 
+                  // need try and catch to do git checkout -b if the branch already created
+                  // if branch already exist need to force push/rebase/merge to Dev/Stage
+                  sh "git checkout -b Stage || git checkout Stage"
                   //  git commit -m "add result.json file to ${env.RELEASE}" 
-                  sh "git push git@github.com:devops2021devops/simple-java-maven-app.git Dev Staging"
+                  sh "git push git@github.com:devops2021devops/simple-java-maven-app.git Dev Stage"
                 
              }
         }
