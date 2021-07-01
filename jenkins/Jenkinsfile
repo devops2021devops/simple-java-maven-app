@@ -16,8 +16,7 @@ pipeline {
     stages {
         stage('checkout devoputils') {
               steps {
-                sh 'git config --list --show-origin'
-                sh 'git config --system --list'
+                sh 'git config --global --list'
                 sh 'git clone https://github.com/devops2021devops/devopsutils.git -b main --single-branch'
               }
         }
