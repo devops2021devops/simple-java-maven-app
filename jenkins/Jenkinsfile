@@ -82,7 +82,7 @@ pipeline {
                     git commit -m "add result.json file to Staging" 
                   //  git commit -m "add result.json file to ${env.RELEASE}" 
                     git commit -m "add result.json file to Dev" 
-                    git push 'git@github.com:devops2021devops/devopsutils.git Dev Staging'
+                    git push git@github.com:devops2021devops/simple-java-maven-app.git Dev Staging
                 """
              }
         }
