@@ -62,21 +62,27 @@ pipeline {
         }
         stage('Deploy') {
              steps {
-               script {
-                       env.RELEASE = input message :'Deploy?' , ok: 'Do it!',
-                           parameters: [choice(name: 'ENVIRONMENTS',choices: ['Dev','Stage','Production'])]
-               }         
-                echo "${env.RELEASE}"
+              // script {
+              //         env.RELEASE = input message :'Deploy?' , ok: 'Do it!',
+              //             parameters: [choice(name: 'ENVIRONMENTS',choices: ['Dev','Stage','Production'])]
+             //  }         
+             //   echo "${env.RELEASE}"
                   
                   
                    sh """
                     git config --global user.email "devopstasks2021@gmail.com"
                     git config --global user.name "devops2021devops"
                     git config --global user.password "Devops2021"
-                    git checkout -b ${env.RELEASE} 
-                    git add result.json 
-                    git commit -m "add result.json file to ${env.RELEASE}" 
-                    git push 'git@github.com:devops2021devops/devopsutils.git'
+                   // git checkout -b ${env.RELEASE} 
+                    git checkout -b Dev
+                    git add result.json
+                    git commit -m "add result.json file to Dev"
+                    git checkout -b Staging
+                    git add result.json
+                    git commit -m "add result.json file to Staging" 
+                  //  git commit -m "add result.json file to ${env.RELEASE}" 
+                    git commit -m "add result.json file to Dev" 
+                    git push 'git@github.com:devops2021devops/devopsutils.git Dev Staging'
                 """
              }
         }
