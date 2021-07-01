@@ -70,7 +70,7 @@ pipeline {
     
                   sh "git config --global user.email 'devopstasks2021@gmail.com'"
                   sh  "git config --global user.name 'devops2021devops'"
-                  sh "git config --global user.password "'Devops2021'"
+                  sh "git config --global user.password 'Devops2021'"
                    // git checkout -b ${env.RELEASE} 
                  sh "git checkout -b Dev"
                     sh "git add result.json"
